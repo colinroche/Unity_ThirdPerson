@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerTestState : PlayerBaseState
 {
+    private float timer = 5f;
     // constructor - as it is inheriting an abstract class
     public PlayerTestState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
@@ -15,7 +16,16 @@ public class PlayerTestState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
-        Debug.Log("Tick");
+        // decrementing timer
+        timer -= deltaTime;
+
+        Debug.Log(timer);
+
+        // switching to new state every 5 seconds
+        if (timer <= 0f)
+        {
+            stateMachine.SwitchState(new PlayerTestState(stateMachine));
+        } 
     }
 
     public override void Exit()

@@ -8,6 +8,6 @@ public class PlayerStateMachine : StateMachine
     private void Start()
     {
         // Go to PlayerTestState
-        SwicthState(new PlayerTestState(this));
+        SwitchState(new PlayerTestState(this));
     }
 }
