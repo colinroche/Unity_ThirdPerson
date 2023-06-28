@@ -9,6 +9,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 {
     // using events to link to State
     public event Action JumpEvent;
+    public event Action DodgeEvent;
 
     private Controls controls;
     private void Start()
@@ -34,5 +35,12 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
         // invoke jump event for whoever is listen
         JumpEvent?.Invoke();
+    }
+
+    public void OnDodge(InputAction.CallbackContext context)
+    {
+        if (!context.performed) { return; }
+
+        DodgeEvent?.Invoke();
     }
 }
