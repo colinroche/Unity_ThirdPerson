@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 // can only inherit 1 Class, anything after is an Interface
 public class InputReader : MonoBehaviour, Controls.IPlayerActions
 {
+    public Vector2 MovementValue {  get; private set; }
+
     // using events to link to State
     public event Action JumpEvent;
     public event Action DodgeEvent;
@@ -42,5 +44,11 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         if (!context.performed) { return; }
 
         DodgeEvent?.Invoke();
+    }
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        // takes in value of Move input
+        MovementValue = context.ReadValue<Vector2>();
     }
 }

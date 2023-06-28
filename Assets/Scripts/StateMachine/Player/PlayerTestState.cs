@@ -4,32 +4,29 @@ using UnityEngine;
 
 public class PlayerTestState : PlayerBaseState
 {
-    private float timer;
     // constructor - as it is inheriting an abstract class
     public PlayerTestState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
     // Implementing the abstract class
     public override void Enter()
     {
-        //subscribing to event call OnJump
-        stateMachine.InputReader.JumpEvent += OnJump;
+
     }
 
     public override void Tick(float deltaTime)
     {
-        timer += deltaTime;
-
-        Debug.Log(timer);
+        // moving in 3D space
+        Vector3 movement = new Vector3();
+        // setting movement
+        movement.x = stateMachine.InputReader.MovementValue.x;
+        movement.y = 0;
+        movement.z = stateMachine.InputReader.MovementValue.y;
+        // moving player in world - move the same regardless of frame rate
+        stateMachine.transform.Translate(movement * deltaTime);
     }
 
     public override void Exit()
     {
-        // unsubscribing to event call OnJump
-        stateMachine.InputReader.JumpEvent -= OnJump;
-    }
 
-    private void OnJump()
-    {
-        stateMachine.SwitchState(new PlayerTestState(stateMachine));
     }
 }
