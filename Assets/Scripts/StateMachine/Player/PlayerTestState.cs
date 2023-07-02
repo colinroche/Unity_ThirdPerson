@@ -22,7 +22,11 @@ public class PlayerTestState : PlayerBaseState
         movement.y = 0;
         movement.z = stateMachine.InputReader.MovementValue.y;
         // moving player in world - move the same regardless of frame rate
-        stateMachine.transform.Translate(movement * deltaTime);
+        stateMachine.Controller.Move(movement * stateMachine.FreeLookMovementSpeed * deltaTime);
+
+        // rotate player when moving left and right
+        if (stateMachine.InputReader.MovementValue == Vector2.zero) { return; }
+        stateMachine.transform.rotation = Quaternion.LookRotation(movement);
     }
 
     public override void Exit()

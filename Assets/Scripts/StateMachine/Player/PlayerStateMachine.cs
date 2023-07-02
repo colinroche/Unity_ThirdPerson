@@ -8,6 +8,8 @@ public class PlayerStateMachine : StateMachine
     // get reference (make it a property)
     // [field: SerializeField] - use for porperty so can be seen in Unity
     [field: SerializeField] public InputReader InputReader { get; private set; }
+    [field: SerializeField] public CharacterController Controller { get; private set; }
+    [field: SerializeField] public float FreeLookMovementSpeed { get; private set; }
 
     private void Start()
     {
