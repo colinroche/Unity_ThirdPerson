@@ -51,4 +51,9 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         // takes in value of Move input
         MovementValue = context.ReadValue<Vector2>();
     }
+
+    public void OnLook(InputAction.CallbackContext context)
+    {
+       
+    }
 }
