@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing.Text;
 using UnityEngine;
 
 public class PlayerTestState : PlayerBaseState
@@ -15,12 +16,8 @@ public class PlayerTestState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
-        // moving in 3D space
-        Vector3 movement = new Vector3();
-        // setting movement
-        movement.x = stateMachine.InputReader.MovementValue.x;
-        movement.y = 0;
-        movement.z = stateMachine.InputReader.MovementValue.y;
+        Vector3 movement = CalculateMovement();
+        
         // moving player in world - move the same regardless of frame rate
         stateMachine.Controller.Move(movement * stateMachine.FreeLookMovementSpeed * deltaTime);
 
@@ -39,5 +36,20 @@ public class PlayerTestState : PlayerBaseState
     public override void Exit()
     {
 
+    }
+
+    private Vector3 CalculateMovement()
+    {
+        Vector3 forward = stateMachine.MainCameraTransform.forward;
+        Vector3 right = stateMachine.MainCameraTransform.right;
+
+        forward.y = 0f;
+        right.y = 0f;
+
+        forward.Normalize();
+        right.Normalize();
+
+        return forward * stateMachine.InputReader.MovementValue.y
+            + right * stateMachine.InputReader.MovementValue.x;
     }
 }
