@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerFreeLookState : PlayerBaseState
 {
     // readonly - as soon as it is asigned it cannot be changed again.
+    private readonly int FreeLookBlendTreeHash = Animator.StringToHash("FreeLookBlendTree");
     private readonly int FreeLookSpeedHash = Animator.StringToHash("FreeLookSpeed");
 
     private float AnimatorDampTime = 0.1f;
@@ -19,6 +20,8 @@ public class PlayerFreeLookState : PlayerBaseState
         // When Target Event is triggered subscribe.
         stateMachine.InputReader.TargetEvent += OnTarget;
 
+        // Play Animation
+        stateMachine.Animator.Play(FreeLookBlendTreeHash);
     }
 
     public override void Tick(float deltaTime)
