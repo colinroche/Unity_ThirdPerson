@@ -48,6 +48,8 @@ public class PlayerFreeLookState : PlayerBaseState
 
     private void OnTarget() 
     {
+        if(!stateMachine.Targeter.SelectTarget()) { return; }
+
         // Switch State to Targeting State
         stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
     }
