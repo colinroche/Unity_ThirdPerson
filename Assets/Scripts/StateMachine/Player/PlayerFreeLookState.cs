@@ -16,6 +16,8 @@ public class PlayerFreeLookState : PlayerBaseState
     // Implementing the abstract class
     public override void Enter()
     {
+        // When Target Event is triggered subscribe.
+        stateMachine.InputReader.TargetEvent += OnTarget;
 
     }
 
@@ -40,7 +42,14 @@ public class PlayerFreeLookState : PlayerBaseState
 
     public override void Exit()
     {
+        // When Target Event is triggered unsubscribe.
+        stateMachine.InputReader.TargetEvent -= OnTarget;
+    }
 
+    private void OnTarget() 
+    {
+        // Switch State to Targeting State
+        stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
     }
 
     private Vector3 CalculateMovement()
