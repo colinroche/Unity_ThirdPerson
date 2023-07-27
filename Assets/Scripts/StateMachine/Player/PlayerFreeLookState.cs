@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing.Text;
 using UnityEngine;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class PlayerFreeLookState : PlayerBaseState
 {
@@ -27,9 +28,9 @@ public class PlayerFreeLookState : PlayerBaseState
     public override void Tick(float deltaTime)
     {
         Vector3 movement = CalculateMovement();
-        
-        // moving player in world - move the same regardless of frame rate
-        stateMachine.Controller.Move(movement * stateMachine.FreeLookMovementSpeed * deltaTime);
+
+        // move the same regardless of frame rate
+        Move(movement * stateMachine.FreeLookMovementSpeed, deltaTime);
 
         // rotate player when moving left and right
         // set animations for idle and running
