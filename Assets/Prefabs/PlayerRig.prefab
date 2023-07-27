@@ -272,7 +272,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1867425965605571962}
-  m_LocalRotation: {x: 0.089848295, y: -0.0060641374, z: 0.0005470753, w: 0.9959369}
+  m_LocalRotation: {x: 0.08984832, y: -0.006064101, z: 0.00054707215, w: 0.9959369}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -503,8 +503,8 @@ MonoBehaviour:
   m_UpdateMethod: 2
   m_Targets:
   - target: {fileID: 2452504342108777390}
-    weight: 1
-    radius: 0
+    weight: 0.25
+    radius: 2
 --- !u!1 &5339106728696741816
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,7 +717,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6365137077341930745}
-  m_LocalRotation: {x: 0.053611655, y: -0.006079975, z: 0.00032643307, w: 0.9985433}
+  m_LocalRotation: {x: 0.053611655, y: -0.0060800095, z: 0.00032643494, w: 0.9985433}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1214,6 +1214,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5246322888321613859, guid: ea5a2ae4a45d5634c9b493b721bd9467, type: 3}
+      propertyPath: cineTargetGroup
+      value: 
+      objectReference: {fileID: 8053976815567895062}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
