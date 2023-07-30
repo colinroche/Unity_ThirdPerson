@@ -19,4 +19,16 @@ public abstract class PlayerBaseState : State
         // Adding gravity to movement
         stateMachine.Controller.Move((motion + stateMachine.ForceReceiver.Movement) * deltaTime);
     }
+
+    protected void FaceTarget()
+    {
+        // Check that we have a target
+        if (stateMachine.Targeter.CurrentTarget == null) { return; }
+        
+        // Take targets position and subtract our position to get a vector pointing from out player to target
+        Vector3 lookPos = stateMachine.Targeter.CurrentTarget.transform.position - stateMachine.transform.position;
+        lookPos.y = 0f;
+
+        stateMachine.transform.rotation = Quaternion.LookRotation(lookPos);
+    }
 }
