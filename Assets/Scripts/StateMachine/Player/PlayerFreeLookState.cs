@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing.Text;
 using UnityEngine;
 
 public class PlayerFreeLookState : PlayerBaseState
@@ -10,6 +9,7 @@ public class PlayerFreeLookState : PlayerBaseState
     private readonly int FreeLookSpeedHash = Animator.StringToHash("FreeLookSpeed");
 
     private float AnimatorDampTime = 0.1f;
+    private const float CrossFadeDuration = 0.1f;
 
     // constructor - as it is inheriting an abstract class
     public PlayerFreeLookState(PlayerStateMachine stateMachine) : base(stateMachine) { }
@@ -21,7 +21,7 @@ public class PlayerFreeLookState : PlayerBaseState
         stateMachine.InputReader.TargetEvent += OnTarget;
 
         // Play Animation
-        stateMachine.Animator.Play(FreeLookBlendTreeHash);
+        stateMachine.Animator.CrossFadeInFixedTime(FreeLookBlendTreeHash, CrossFadeDuration);
     }
 
     public override void Tick(float deltaTime)
