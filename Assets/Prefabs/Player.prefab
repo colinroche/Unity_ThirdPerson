@@ -1,5 +1,60 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &187796356927113441
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 419710946555641749}
+  - component: {fileID: 4502251321738485988}
+  m_Layer: 0
+  m_Name: WeaponLogic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &419710946555641749
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187796356927113441}
+  m_LocalRotation: {x: -0.0037831194, y: 0.030788979, z: -0.12293075, w: 0.9919303}
+  m_LocalPosition: {x: -0.362, y: 0.176, z: 0.051}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3178192935077638233}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0.004, y: 3.555, z: -14.129}
+--- !u!136 &4502251321738485988
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187796356927113441}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Height: 1.25
+  m_Direction: 0
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &290587206752122143
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,6 +533,7 @@ Transform:
   - {fileID: 609895641669022565}
   - {fileID: 3175066390030224628}
   - {fileID: 5944106191638156385}
+  - {fileID: 419710946555641749}
   m_Father: {fileID: 6515159422357874393}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -11.868048, y: 6.221693, z: 4.829413}
@@ -1601,6 +1657,7 @@ GameObject:
   - component: {fileID: 8387329149297077676}
   - component: {fileID: 4519869309829504272}
   - component: {fileID: 3684414300192470215}
+  - component: {fileID: 2235461265633381287}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1743,6 +1800,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 4519869309829504272}
   drag: 0.1
+--- !u!114 &2235461265633381287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4683370120736250962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8ca96a29aa706b4fa42a34a36d750ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponLogic: {fileID: 187796356927113441}
 --- !u!1 &4924511098113029650
 GameObject:
   m_ObjectHideFlags: 0
