@@ -1,14 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing.Text;
 using UnityEngine;
 
 public class PlayerAttackingState : PlayerBaseState
 {
     private Attack attack;
 
-    private float previousFrameTime;
+    /*private float previousFrameTime;*/
+    private bool alreadyAppliedForce;
 
     private string attackTag = "Attack";
 
@@ -31,9 +31,13 @@ public class PlayerAttackingState : PlayerBaseState
 
         float normalizedTime = GetNormalizedTime();
 
-        // Check if we are still inside of the previous state
-        if (normalizedTime > previousFrameTime && normalizedTime < 1f) 
+        if (normalizedTime < 1f) 
         {
+            if (normalizedTime >= attack.ForceTime)
+            {
+                TryApplyForce();
+            }
+
             if (stateMachine.InputReader.IsAttacking)
             {
                 TryComboAttack(normalizedTime);
@@ -41,10 +45,17 @@ public class PlayerAttackingState : PlayerBaseState
         }
         else
         {
-            // Go back to locomotion
+            if (stateMachine.Targeter.CurrentTarget != null)
+            {
+                stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
+            }
+            else
+            {
+                stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
+            }
         }
 
-        previousFrameTime = normalizedTime;
+        /*previousFrameTime = normalizedTime;*/
     }
 
     public override void Exit()
@@ -61,6 +72,14 @@ public class PlayerAttackingState : PlayerBaseState
         if (normalizedTime < attack.ComboAttackTime) { return; }
 
         stateMachine.SwitchState(new PlayerAttackingState(stateMachine, attack.ComboStateIndex));
+    }
+
+    private void TryApplyForce()
+    {
+        if (alreadyAppliedForce) { return; }
+
+        stateMachine.ForceReceiver.AddForce(stateMachine.transform.forward * attack.Force);
+        alreadyAppliedForce = true;
     }
 
     // Normalize as animations are different lengths
