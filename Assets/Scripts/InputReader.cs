@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 // can only inherit 1 Class, anything after is an Interface
 public class InputReader : MonoBehaviour, Controls.IPlayerActions
 {
+    public bool IsAttacking { get; private set; }
     public Vector2 MovementValue {  get; private set; }
 
     // using events to link to State
@@ -44,6 +45,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public void OnDodge(InputAction.CallbackContext context)
     {
         if (!context.performed) { return; }
+
         DodgeEvent?.Invoke();
     }
 
@@ -61,12 +63,26 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public void OnTarget(InputAction.CallbackContext context)
     {
         if (!context.performed) { return; }
+
         TargetEvent?.Invoke();
     }
 
     public void OnCancel(InputAction.CallbackContext context)
     {
         if (!context.performed) { return; }
+
         CancelEvent?.Invoke();
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    { 
+        if (context.performed)
+        {
+            IsAttacking = true;
+        }
+        else if (context.canceled)
+        {
+            IsAttacking = false;
+        }
     }
 }
