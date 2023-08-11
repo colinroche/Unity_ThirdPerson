@@ -10,8 +10,6 @@ public class PlayerAttackingState : PlayerBaseState
     /*private float previousFrameTime;*/
     private bool alreadyAppliedForce;
 
-    private string attackTag = "Attack";
-
     public PlayerAttackingState(PlayerStateMachine stateMachine, int attackIndex) : base(stateMachine)
     {
         attack = stateMachine.Attacks[attackIndex];
@@ -19,7 +17,7 @@ public class PlayerAttackingState : PlayerBaseState
 
     public override void Enter()
     {
-        stateMachine.Weapon.SetAttack(attack.Damage);
+        stateMachine.Weapon.SetAttack(attack.Damage, attack.Knockback);
         // Transistion instead of just play.
         stateMachine.Animator.CrossFadeInFixedTime(attack.AnimationName, attack.TransitionDuration);
     }
@@ -30,7 +28,7 @@ public class PlayerAttackingState : PlayerBaseState
 
         FaceTarget();
 
-        float normalizedTime = GetNormalizedTime();
+        float normalizedTime = GetNormalizedTime(stateMachine.Animator);
 
         if (normalizedTime < 1f) 
         {
@@ -81,28 +79,5 @@ public class PlayerAttackingState : PlayerBaseState
 
         stateMachine.ForceReceiver.AddForce(stateMachine.transform.forward * attack.Force);
         alreadyAppliedForce = true;
-    }
-
-    // Normalize as animations are different lengths
-    private float GetNormalizedTime()
-    {
-        // Get data for current and next states and set layer to 0
-        AnimatorStateInfo currentInfo = stateMachine.Animator.GetCurrentAnimatorStateInfo(0);
-        AnimatorStateInfo nextInfo = stateMachine.Animator.GetNextAnimatorStateInfo(0);
-
-        // If transitioning to an attack
-        if (stateMachine.Animator.IsInTransition(0) && nextInfo.IsTag(attackTag))
-        {
-            // How far through the state we are
-            return nextInfo.normalizedTime;
-        }
-        else if (!stateMachine.Animator.IsInTransition(0) && currentInfo.IsTag(attackTag))
-        {
-            return currentInfo.normalizedTime;
-        }
-        else
-        {
-            return 0f;
-        }
     }
 }
