@@ -1759,7 +1759,7 @@ MonoBehaviour:
     <ComboAttackTime>k__BackingField: 0.6
     <ForceTime>k__BackingField: 0.35
     <Force>k__BackingField: 15
-    <Knockback>k__BackingField: 10
+    <Knockback>k__BackingField: 5
     <Damage>k__BackingField: 10
   - <AnimationName>k__BackingField: Attack2
     <TransitionDuration>k__BackingField: 0.1
@@ -1767,7 +1767,7 @@ MonoBehaviour:
     <ComboAttackTime>k__BackingField: 0.5
     <ForceTime>k__BackingField: 0.35
     <Force>k__BackingField: 15
-    <Knockback>k__BackingField: 15
+    <Knockback>k__BackingField: 10
     <Damage>k__BackingField: 15
   - <AnimationName>k__BackingField: Attack3
     <TransitionDuration>k__BackingField: 0.2
@@ -1775,7 +1775,7 @@ MonoBehaviour:
     <ComboAttackTime>k__BackingField: 0
     <ForceTime>k__BackingField: 0.35
     <Force>k__BackingField: 20
-    <Knockback>k__BackingField: 20
+    <Knockback>k__BackingField: 15
     <Damage>k__BackingField: 20
 --- !u!114 &1234212229879732453
 MonoBehaviour:
