@@ -22,6 +22,17 @@ public abstract class EnemyBaseState : State
         stateMachine.Controller.Move((motion + stateMachine.ForceReceiver.Movement) * deltaTime);
     }
 
+    protected void FacePlayer()
+    {
+        if (stateMachine.Player == null) { return; }
+
+        // Point in direction of player
+        Vector3 lookPos = stateMachine.Player.transform.position - stateMachine.transform.position;
+        lookPos.y = 0f;
+
+        stateMachine.transform.rotation = Quaternion.LookRotation(lookPos);
+    }
+
     // Get distance between enemy and player check in chasing range
     protected bool IsInChaseRange()
     {
