@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 
 public class EnemyIdleState : EnemyBaseState
 {
@@ -24,8 +23,7 @@ public class EnemyIdleState : EnemyBaseState
 
         if (IsInChaseRange())
         {
-            Debug.Log("In Range");
-            // Transistion to chasing state
+            stateMachine.SwitchState(new EnemyChasingState(stateMachine));
             return;
         }
 
