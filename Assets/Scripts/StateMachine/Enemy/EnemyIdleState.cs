@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 
 public class EnemyIdleState : EnemyBaseState
 {
@@ -19,6 +20,15 @@ public class EnemyIdleState : EnemyBaseState
 
     public override void Tick(float deltaTime)
     {
+        Move(deltaTime);
+
+        if (IsInChaseRange())
+        {
+            Debug.Log("In Range");
+            // Transistion to chasing state
+            return;
+        }
+
         stateMachine.Animator.SetFloat(SpeedHash, 0f, AnimatorDampTime, deltaTime);
     }
 
