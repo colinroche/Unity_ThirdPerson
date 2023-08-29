@@ -17,8 +17,9 @@ public class PlayerFreeLookState : PlayerBaseState
     // Implementing the abstract class
     public override void Enter()
     {
-        // When Target Event is triggered subscribe.
+        // When Event is triggered subscribe.
         stateMachine.InputReader.TargetEvent += OnTarget;
+        stateMachine.InputReader.JumpEvent += OnJump;
 
         // Play Animation
         stateMachine.Animator.CrossFadeInFixedTime(FreeLookBlendTreeHash, CrossFadeDuration);
@@ -51,8 +52,9 @@ public class PlayerFreeLookState : PlayerBaseState
 
     public override void Exit()
     {
-        // When Target Event is triggered unsubscribe.
+        // When Event is triggered unsubscribe.
         stateMachine.InputReader.TargetEvent -= OnTarget;
+        stateMachine.InputReader.JumpEvent -= OnJump;
     }
 
     private void OnTarget() 
@@ -61,6 +63,11 @@ public class PlayerFreeLookState : PlayerBaseState
 
         // Switch State to Targeting State
         stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
+    }
+
+    private void OnJump()
+    {
+        stateMachine.SwitchState(new PlayerJumpingState(stateMachine));
     }
 
     private Vector3 CalculateMovement()
@@ -86,4 +93,6 @@ public class PlayerFreeLookState : PlayerBaseState
             Quaternion.LookRotation(movement),
             deltaTime * stateMachine.RotationDamping);
     }
+
+
 }
