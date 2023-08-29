@@ -36,6 +36,8 @@ public abstract class EnemyBaseState : State
     // Get distance between enemy and player check in chasing range
     protected bool IsInChaseRange()
     {
+        if (stateMachine.Player.IsDead) { return false; }
+
         float playerDistanceSqr = (stateMachine.Player.transform.position - stateMachine.transform.position).sqrMagnitude;
 
         return playerDistanceSqr <= stateMachine.PlayerChasingRange * stateMachine.PlayerChasingRange;

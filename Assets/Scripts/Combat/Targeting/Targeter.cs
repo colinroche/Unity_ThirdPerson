@@ -49,7 +49,7 @@ public class Targeter : MonoBehaviour
             Vector2 viewPos = mainCamera.WorldToViewportPoint(target.transform.position);
 
             // Checking if target is on screen
-            if (viewPos.x < 0f || viewPos.x > 1f || viewPos.y < 0f || viewPos.y > 1f) { continue; }
+            if (!target.GetComponentInChildren<Renderer>().isVisible) { continue; }
 
             // Setting the closet target to the current target if it is actually closer
             Vector2 toCenter = viewPos - new Vector2(0.5f, 0.5f);
