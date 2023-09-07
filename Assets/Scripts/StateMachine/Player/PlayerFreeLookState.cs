@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerFreeLookState : PlayerBaseState
 {
+    private bool shouldFade;
+
     // readonly - as soon as it is asigned it cannot be changed again.
     private readonly int FreeLookBlendTreeHash = Animator.StringToHash("FreeLookBlendTree");
     private readonly int FreeLookSpeedHash = Animator.StringToHash("FreeLookSpeed");
@@ -12,7 +14,10 @@ public class PlayerFreeLookState : PlayerBaseState
     private const float CrossFadeDuration = 0.1f;
 
     // constructor - as it is inheriting an abstract class
-    public PlayerFreeLookState(PlayerStateMachine stateMachine) : base(stateMachine) { }
+    public PlayerFreeLookState(PlayerStateMachine stateMachine, bool shouldFade = true) : base(stateMachine) 
+    { 
+        this.shouldFade = shouldFade;
+    }
 
     // Implementing the abstract class
     public override void Enter()
@@ -21,8 +26,17 @@ public class PlayerFreeLookState : PlayerBaseState
         stateMachine.InputReader.TargetEvent += OnTarget;
         stateMachine.InputReader.JumpEvent += OnJump;
 
-        // Play Animation
-        stateMachine.Animator.CrossFadeInFixedTime(FreeLookBlendTreeHash, CrossFadeDuration);
+        stateMachine.Animator.SetFloat(FreeLookSpeedHash, 0f);
+
+        if (shouldFade)
+        {
+            // Play Animation
+            stateMachine.Animator.CrossFadeInFixedTime(FreeLookBlendTreeHash, CrossFadeDuration);
+        }
+        else
+        {
+            stateMachine.Animator.Play(FreeLookBlendTreeHash);
+        }
     }
 
     public override void Tick(float deltaTime)
@@ -42,11 +56,11 @@ public class PlayerFreeLookState : PlayerBaseState
         // set animations for idle and running
         if (stateMachine.InputReader.MovementValue == Vector2.zero) 
         {
-            stateMachine.Animator.SetFloat(FreeLookSpeedHash, 0, AnimatorDampTime, deltaTime);
+            stateMachine.Animator.SetFloat(FreeLookSpeedHash, 0f, AnimatorDampTime, deltaTime);
             return; 
         }
 
-        stateMachine.Animator.SetFloat(FreeLookSpeedHash, 1, AnimatorDampTime, deltaTime);
+        stateMachine.Animator.SetFloat(FreeLookSpeedHash, 1f, AnimatorDampTime, deltaTime);
         FaceMovementDirection(movement, deltaTime);
     }
 
