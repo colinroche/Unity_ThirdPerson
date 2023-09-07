@@ -16,7 +16,7 @@ public class PlayerTargetingState : PlayerBaseState
     public override void Enter()
     {
         // When Event is triggered subscribe.
-        stateMachine.InputReader.CancelEvent += OnCancel;
+        stateMachine.InputReader.TargetEvent += OnTarget;
         stateMachine.InputReader.DodgeEvent += OnDodge;
         stateMachine.InputReader.JumpEvent += OnJump;
 
@@ -56,12 +56,12 @@ public class PlayerTargetingState : PlayerBaseState
     public override void Exit()
     {
         // When Event is triggered unsubscribe.
-        stateMachine.InputReader.CancelEvent -= OnCancel;
+        stateMachine.InputReader.TargetEvent -= OnTarget;
         stateMachine.InputReader.DodgeEvent -= OnDodge;
         stateMachine.InputReader.JumpEvent -= OnJump;
     }
 
-    private void OnCancel()
+    private void OnTarget()
     {
         stateMachine.Targeter.Cancel();
 

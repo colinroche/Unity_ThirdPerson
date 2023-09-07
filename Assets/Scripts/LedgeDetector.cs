@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class LedgeDetector : MonoBehaviour
 {
-    public event Action<Vector3> OnLedgeDetect;
+    public event Action<Vector3, Vector3> OnLedgeDetect;
 
     public void OnTriggerEnter(Collider other)
     {
-        // Invoke(where did our hands touch the ledge, direction of ledege to hands)
-        OnLedgeDetect?.Invoke(other.transform.forward);
+        // Closest point to the edge of the ledge, closest point to hands
+        OnLedgeDetect?.Invoke(other.transform.forward, other.ClosestPointOnBounds(transform.position));
     }
 }
