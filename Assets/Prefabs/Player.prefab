@@ -2342,6 +2342,7 @@ MonoBehaviour:
   <Weapon>k__BackingField: {fileID: 7535219223544362224}
   <Health>k__BackingField: {fileID: 548249058828232948}
   <Ragdoll>k__BackingField: {fileID: 8599500626269866615}
+  <LedgeDetector>k__BackingField: {fileID: 4817839062640447895}
   <FreeLookMovementSpeed>k__BackingField: 6
   <TargetingMovementSpeed>k__BackingField: 5
   <RotationDamping>k__BackingField: 10
@@ -4244,6 +4245,7 @@ GameObject:
   - component: {fileID: 8072642157906318648}
   - component: {fileID: 5536854640541627920}
   - component: {fileID: 8292693804143604105}
+  - component: {fileID: 4817839062640447895}
   m_Layer: 8
   m_Name: LedgeDetector
   m_TagString: Untagged
@@ -4314,6 +4316,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4817839062640447895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8543115847627408150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42397e1364778b44c97aba48ac47118f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8831979007932823482
 GameObject:
   m_ObjectHideFlags: 0
